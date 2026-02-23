@@ -7,13 +7,9 @@ build:
   jobs:
     build:
       html:
+        - pip install -r requirements-rtd.txt
+        - pip install .
         - zensical build
     post_build:
       - mkdir -p $READTHEDOCS_OUTPUT/html/
       - cp --recursive site/* $READTHEDOCS_OUTPUT/html/
-
-python:
-  install:
-    - requirements: requirements-rtd.txt
-    - method: pip
-      path: .
