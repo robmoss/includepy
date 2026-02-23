@@ -11,6 +11,14 @@ The `includepy` package provides a Markdown preprocessor that allows you to incl
     This extensions works with all of the standard [code block features](https://zensical.org/docs/authoring/code-blocks/), such as line numbering, line highlighting, and code annotations.
     See [Including a function](#including-a-function) for an example.
 
+## Installation
+
+Install `includepy` with pip:
+
+```sh
+pip install includepy
+```
+
 ## Configuration
 
 Add the following settings to your [Zensical](https://zensical.org/) or [MkDocs](https://www.mkdocs.org/) configuration:
