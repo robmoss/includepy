@@ -5,10 +5,11 @@ build:
   tools:
     python: latest
   jobs:
+    install:
+      - pip install -r requirements-rtd.txt
+      - pip install .
     build:
       html:
-        - pip install -r requirements-rtd.txt
-        - pip install .
         - zensical build
     post_build:
       - mkdir -p $READTHEDOCS_OUTPUT/html/
