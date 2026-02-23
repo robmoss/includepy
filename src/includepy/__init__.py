@@ -58,13 +58,36 @@ def find_object(name: str | None, node: ast.AST) -> ast.AST:
 
 
 class ProcessorState:
+    """
+    Define an interface for processing Markdown lines.
+    """
+
     def read_line(
         self, input_line: str | None, output_lines: list[str]
     ) -> "ProcessorState":
+        """
+        Process an input line and return the updated processor state.
+
+        Parameters
+        ----------
+        input_line : str | None
+            A line of text, or ``None`` to indicate the end of the file.
+        output_lines: list[str]
+            The output Markdown lines, can be mutably updated.
+
+        Returns
+        -------
+        ProcessorState
+            The new state of the IncludePy processor.
+        """
         return self  # pragma: no cover
 
 
 class EchoLines(ProcessorState):
+    """
+    Preserve existing Markdown content.
+    """
+
     def read_line(
         self, input_line: str | None, output_lines: list[str]
     ) -> ProcessorState:
@@ -82,6 +105,10 @@ class EchoLines(ProcessorState):
 
 
 class ParseBlock(ProcessorState):
+    """
+    Parse an IncludePy block and add the specified Python code to the output.
+    """
+
     def __init__(self, re_match: re.Match[str]):
         # 1. Indentation
         # 2. Escaping
@@ -203,8 +230,6 @@ class ParseBlock(ProcessorState):
             indent_str + obj_line.rstrip() for obj_line in obj_lines
         ]
         output_lines.extend(code_lines)
-
-        pass
 
 
 class IncludePyError(Exception):

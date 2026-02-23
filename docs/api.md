@@ -10,3 +10,4 @@ icon: lucide/book-type
       show_root_members_full_path: true
       docstring_section_style: list
       show_signature_annotations: true
+      members_order: source
