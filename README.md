@@ -1,5 +1,8 @@
 # Include Python source code in Markdown files
 
+[![Latest version](https://badge.fury.io/py/includepy.svg)](https://pypi.org/project/includepy/)
+[![Documentation](https://readthedocs.org/projects/includepy/badge/)](https://includepy.readthedocs.io/)
+
 The `includepy` package provides a Markdown preprocessor that allows you to include the source code for a specific Python object (e.g., a function or class) when rendering Markdown content.
 
 For example, to include the source code for the `factorial` function in `tests/example.py`, add the following lines in a code block:
