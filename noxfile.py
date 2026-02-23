@@ -8,6 +8,19 @@ def build(session):
     session.run("python", "-m", "build")
 
 
+@nox.session(default=False)
+def publish(session):
+    """Publish a binary (wheel) package to PyPI."""
+    if not session.posargs:
+        print("No wheel file specified, nothing to publish")
+        return
+
+    session.install("twine")
+    # NOTE: support building packages with metadata 2.3.
+    session.install("pkginfo>=1.10.0")
+    session.run("twine", *session.posargs)
+
+
 @nox.session()
 def tests(session):
     """Run test cases and record test coverage."""
