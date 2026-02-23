@@ -23,3 +23,5 @@ def factorial(n: int) -> int:
         value *= n
     return value
 ```
+
+See the [documentation](https://includepy.readthedocs.io/) for further details.
