@@ -8,6 +8,7 @@ nav = [
   { "Get started" = "index.md" },
   { "Options" = "options.md"},
   { "API Reference" = "api.md" },
+  { "Changelog" = "changelog.md" },
   { "Acknowledgements" = "acknowledgements.md" },
   { "License" = "license.md" },
 ]

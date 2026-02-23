@@ -43,8 +43,10 @@ optional-dependencies.docs = [
 ]
 
 [project.urls]
-source = "https://github.com/robmoss/includepy"
-documentation = "https://includepy.readthedocs.io/"
+Source = "https://github.com/robmoss/includepy"
+Documentation = "https://includepy.readthedocs.io/"
+Homepage = "https://includepy.readthedocs.io/"
+Changelog = "https://includepy.readthedocs.io/en/latest/changelog/"
 
 [tool.pytest.ini_options]
 addopts = """\
