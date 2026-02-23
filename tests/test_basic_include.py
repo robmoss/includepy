@@ -10,7 +10,7 @@ def test_basic_include_single():
     text = textwrap.dedent(
         """
         ```
-        -->includepy<-- tests/example.py
+        -->includepy<-- example.py
         -->pyobject<-- factorial
         ```
         """
@@ -19,7 +19,7 @@ def test_basic_include_single():
     original_html = markdown.markdown(text, extensions=["fenced_code"])
     expected_original = textwrap.dedent(
         """\
-        <pre><code>--&gt;includepy&lt;-- tests/example.py
+        <pre><code>--&gt;includepy&lt;-- example.py
         --&gt;pyobject&lt;-- factorial
         </code></pre>"""
     )
@@ -53,7 +53,7 @@ def test_basic_include_single_extra_lines_1():
     text = textwrap.dedent(
         """
         ```
-        -->includepy<-- tests/example.py
+        -->includepy<-- example.py
         -->pyobject<-- factorial
         -->lines_before<-- 4
         -->lines_after<-- 3
@@ -64,7 +64,7 @@ def test_basic_include_single_extra_lines_1():
     original_html = markdown.markdown(text, extensions=["fenced_code"])
     expected_original = textwrap.dedent(
         """\
-        <pre><code>--&gt;includepy&lt;-- tests/example.py
+        <pre><code>--&gt;includepy&lt;-- example.py
         --&gt;pyobject&lt;-- factorial
         --&gt;lines_before&lt;-- 4
         --&gt;lines_after&lt;-- 3
@@ -95,7 +95,7 @@ def test_basic_include_single_extra_lines_1():
             return value
 
 
-        def duplicated() -&gt; int:
+        class MyClass:
         </code></pre>"""
     )
 
@@ -109,11 +109,11 @@ def test_basic_include_multiple():
     text = textwrap.dedent(
         """
         ```
-        -->includepy<-- tests/example.py
+        -->includepy<-- example.py
         -->pyobject<-- factorial
-        -->includepy<-- tests/example.py
+        -->includepy<-- example.py
         -->pyobject<-- hello
-        -->includepy<-- tests/example.py
+        -->includepy<-- example.py
         -->pyobject<-- something
         ```
         """
@@ -122,11 +122,11 @@ def test_basic_include_multiple():
     original_html = markdown.markdown(text, extensions=["fenced_code"])
     expected_original = textwrap.dedent(
         """\
-        <pre><code>--&gt;includepy&lt;-- tests/example.py
+        <pre><code>--&gt;includepy&lt;-- example.py
         --&gt;pyobject&lt;-- factorial
-        --&gt;includepy&lt;-- tests/example.py
+        --&gt;includepy&lt;-- example.py
         --&gt;pyobject&lt;-- hello
-        --&gt;includepy&lt;-- tests/example.py
+        --&gt;includepy&lt;-- example.py
         --&gt;pyobject&lt;-- something
         </code></pre>"""
     )

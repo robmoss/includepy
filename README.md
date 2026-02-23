@@ -6,10 +6,10 @@
 
 The `includepy` package provides a Markdown preprocessor that allows you to include the source code for a specific Python object (e.g., a function or class) when rendering Markdown content.
 
-For example, to include the source code for the `factorial` function in `tests/example.py`, add the following lines in a code block:
+For example, to include the source code for the `factorial` function in [`example.py`](example.py), add the following lines in a code block:
 
 ```py
--->includepy<-- tests/example.py
+-->includepy<-- example.py
 -->pyobject<-- factorial
 ```
 

@@ -30,10 +30,10 @@ Add the following settings to your [Zensical](https://zensical.org/) or [MkDocs]
 
 ## Example Python file
 
-We  use the `tests/example.py` file in the examples below:
+We  use the `example.py` file in the examples below:
 
 ```py
---8<-- "tests/example.py"
+--8<-- "example.py"
 ```
 
 ## Including a function
@@ -42,7 +42,7 @@ If you write the following Markdown:
 
 ~~~md
 ```py title="The factorial function", linenums="1", hl_lines="3-5"
-;-->includepy<-- tests/example.py
+;-->includepy<-- example.py
 ;-->pyobject<-- factorial
 ```
 
@@ -52,7 +52,7 @@ If you write the following Markdown:
 You will get the following HTML:
 
 ```py title="The factorial function", linenums="1", hl_lines="3-5"
--->includepy<-- tests/example.py
+-->includepy<-- example.py
 -->pyobject<-- factorial
 ```
 
@@ -64,7 +64,7 @@ If you write the following Markdown:
 
 ~~~md
 ```py
-;-->includepy<-- tests/example.py
+;-->includepy<-- example.py
 ;-->pyobject<-- MyClass
 ```
 ~~~
@@ -72,7 +72,7 @@ If you write the following Markdown:
 You will get the following HTML:
 
 ```py
--->includepy<-- tests/example.py
+-->includepy<-- example.py
 -->pyobject<-- MyClass
 ```
 
@@ -82,7 +82,7 @@ If you write the following Markdown:
 
 ~~~md
 ```py
-;-->includepy<-- tests/example.py
+;-->includepy<-- example.py
 ;-->pyobject<-- MyClass.do_thing
 ```
 ~~~
@@ -90,7 +90,7 @@ If you write the following Markdown:
 You will get the following HTML:
 
 ```py
--->includepy<-- tests/example.py
+-->includepy<-- example.py
 -->pyobject<-- MyClass.do_thing
 ```
 
@@ -101,7 +101,7 @@ If you write the following Markdown:
 ~~~md
 ```py
 x = 1
-;-->includepy<-- tests/example.py
+;-->includepy<-- example.py
 ;-->pyobject<-- factorial
 y = 2
 ```
@@ -111,7 +111,7 @@ You will get the following HTML:
 
 ```py
 x = 1
--->includepy<-- tests/example.py
+-->includepy<-- example.py
 -->pyobject<-- factorial
 y = 2
 ```
@@ -122,7 +122,7 @@ If you write the following Markdown:
 
 ~~~md
 ```py
-;-->includepy<-- tests/example.py
+;-->includepy<-- example.py
 ;-->pyobject<-- factorial
 ;-->extra_indent<-- 4
 ```
@@ -131,7 +131,7 @@ If you write the following Markdown:
 You will get the following HTML:
 
 ```py
--->includepy<-- tests/example.py
+-->includepy<-- example.py
 -->pyobject<-- factorial
 -->extra_indent<-- 4
 ```
@@ -142,7 +142,7 @@ If you write the following Markdown:
 
 ~~~md
 ```py
-;-->includepy<-- tests/example.py
+;-->includepy<-- example.py
 ;-->pyobject<-- factorial
 ;-->lines_before<-- 4
 ;-->lines_after<-- 4
@@ -152,7 +152,7 @@ If you write the following Markdown:
 You will get the following HTML:
 
 ```py
--->includepy<-- tests/example.py
+-->includepy<-- example.py
 -->pyobject<-- factorial
 -->lines_before<-- 4
 -->lines_after<-- 4
@@ -166,7 +166,7 @@ If you write the following Markdown:
 
 ~~~md
 ```py
-;-->includepy<-- tests/example.py
+;-->includepy<-- example.py
 ;-->pyobject<-- something
 ;-->lines_before<-- 40
 ```
@@ -175,7 +175,7 @@ If you write the following Markdown:
 You will get the following HTML:
 
 ```py
--->includepy<-- tests/example.py
+-->includepy<-- example.py
 -->pyobject<-- something
 -->lines_before<-- 40
 ```
@@ -184,7 +184,7 @@ If you write the following Markdown:
 
 ~~~md
 ```py
-;-->includepy<-- tests/example.py
+;-->includepy<-- example.py
 ;-->pyobject<-- MyClass
 ;-->lines_after<-- 40
 ```
@@ -193,7 +193,7 @@ If you write the following Markdown:
 You will get the following HTML:
 
 ```py
--->includepy<-- tests/example.py
+-->includepy<-- example.py
 -->pyobject<-- MyClass
 -->lines_after<-- 40
 ```
@@ -208,10 +208,10 @@ If you write the following Markdown:
 - Another thing:
 
     ```py
-    ;-->includepy<-- tests/example.py
+    ;-->includepy<-- example.py
     ;-->pyobject<-- factorial
 
-    ;-->includepy<-- tests/example.py
+    ;-->includepy<-- example.py
     ;-->pyobject<-- MyClass.do_thing
     ```
 ~~~
@@ -223,10 +223,10 @@ You will get the following HTML:
 - Another thing:
 
     ```py
-    -->includepy<-- tests/example.py
+    -->includepy<-- example.py
     -->pyobject<-- factorial
 
-    -->includepy<-- tests/example.py
+    -->includepy<-- example.py
     -->pyobject<-- MyClass.do_thing
     ```
 
@@ -235,14 +235,14 @@ You will get the following HTML:
 If you write the following Markdown:
 
 ```md
-;;-->includepy<-- tests/example.py
+;;-->includepy<-- example.py
 ;;-->pyobject<-- factorial
 ```
 
 You will get the following HTML:
 
 ```md
-;-->includepy<-- tests/example.py
+;-->includepy<-- example.py
 ;-->pyobject<-- factorial
 ```
 
@@ -250,13 +250,13 @@ You can use any number of semi-colons.
 For example, to show how to escape a `includepy` block you can write the following Markdown:
 
 ```md
-;;;-->includepy<-- tests/example.py
+;;;-->includepy<-- example.py
 ;;;-->pyobject<-- factorial
 ```
 
 You will get the following HTML:
 
 ```md
-;;-->includepy<-- tests/example.py
+;;-->includepy<-- example.py
 ;;-->pyobject<-- factorial
 ```

@@ -11,7 +11,7 @@ def test_no_pyobject():
     text = textwrap.dedent(
         """
         ```
-        -->includepy<-- tests/example.py
+        -->includepy<-- example.py
         ```
         """
     )
@@ -19,7 +19,7 @@ def test_no_pyobject():
     original_html = markdown.markdown(text, extensions=["fenced_code"])
     expected_original = textwrap.dedent(
         """\
-        <pre><code>--&gt;includepy&lt;-- tests/example.py
+        <pre><code>--&gt;includepy&lt;-- example.py
         </code></pre>"""
     )
     assert original_html == expected_original
@@ -35,7 +35,7 @@ def test_invalid_option():
     text = textwrap.dedent(
         """
         ```
-        -->includepy<-- tests/example.py
+        -->includepy<-- example.py
         -->pyobject<-- factorial
         -->unknown_option<-- value
         ```
@@ -45,7 +45,7 @@ def test_invalid_option():
     original_html = markdown.markdown(text, extensions=["fenced_code"])
     expected_original = textwrap.dedent(
         """\
-        <pre><code>--&gt;includepy&lt;-- tests/example.py
+        <pre><code>--&gt;includepy&lt;-- example.py
         --&gt;pyobject&lt;-- factorial
         --&gt;unknown_option&lt;-- value
         </code></pre>"""
@@ -63,7 +63,7 @@ def test_duplicate_option():
     text = textwrap.dedent(
         """
         ```
-        -->includepy<-- tests/example.py
+        -->includepy<-- example.py
         -->pyobject<-- factorial
         -->pyobject<-- factorial
         ```
@@ -73,7 +73,7 @@ def test_duplicate_option():
     original_html = markdown.markdown(text, extensions=["fenced_code"])
     expected_original = textwrap.dedent(
         """\
-        <pre><code>--&gt;includepy&lt;-- tests/example.py
+        <pre><code>--&gt;includepy&lt;-- example.py
         --&gt;pyobject&lt;-- factorial
         --&gt;pyobject&lt;-- factorial
         </code></pre>"""
@@ -91,7 +91,7 @@ def test_missing_objects():
     text = textwrap.dedent(
         """
         ```
-        -->includepy<-- tests/example.py
+        -->includepy<-- example.py
         -->pyobject<-- notdefined
         ```
         """
@@ -100,7 +100,7 @@ def test_missing_objects():
     original_html = markdown.markdown(text, extensions=["fenced_code"])
     expected_original = textwrap.dedent(
         """\
-        <pre><code>--&gt;includepy&lt;-- tests/example.py
+        <pre><code>--&gt;includepy&lt;-- example.py
         --&gt;pyobject&lt;-- notdefined
         </code></pre>"""
     )
@@ -119,7 +119,7 @@ def test_duplicate_objects():
     text = textwrap.dedent(
         """
         ```
-        -->includepy<-- tests/example.py
+        -->includepy<-- tests/duplicates.py
         -->pyobject<-- duplicated
         ```
         """
@@ -128,7 +128,7 @@ def test_duplicate_objects():
     original_html = markdown.markdown(text, extensions=["fenced_code"])
     expected_original = textwrap.dedent(
         """\
-        <pre><code>--&gt;includepy&lt;-- tests/example.py
+        <pre><code>--&gt;includepy&lt;-- tests/duplicates.py
         --&gt;pyobject&lt;-- duplicated
         </code></pre>"""
     )

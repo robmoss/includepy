@@ -19,14 +19,6 @@ def factorial(n: int) -> int:
     return value
 
 
-def duplicated() -> int:
-    return 1
-
-
-def duplicated() -> int:  # noqa: F811
-    return 2
-
-
 class MyClass:
     def do_thing(self, value: str) -> str:
         return f"MyClass: {value}"

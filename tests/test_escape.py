@@ -10,11 +10,11 @@ def test_escape_simple():
     text = textwrap.dedent(
         """
         ```
-        ;-->includepy<-- tests/example.py
+        ;-->includepy<-- example.py
         ;-->some_option<-- some_value
-        ;;-->includepy<-- tests/example.py
+        ;;-->includepy<-- example.py
         ;;-->some_option<-- some_value
-        ;;;-->includepy<-- tests/example.py
+        ;;;-->includepy<-- example.py
         ;;;-->some_option<-- some_value
         ```
         """
@@ -23,11 +23,11 @@ def test_escape_simple():
     original_html = markdown.markdown(text, extensions=["fenced_code"])
     expected_original = textwrap.dedent(
         """\
-        <pre><code>;--&gt;includepy&lt;-- tests/example.py
+        <pre><code>;--&gt;includepy&lt;-- example.py
         ;--&gt;some_option&lt;-- some_value
-        ;;--&gt;includepy&lt;-- tests/example.py
+        ;;--&gt;includepy&lt;-- example.py
         ;;--&gt;some_option&lt;-- some_value
-        ;;;--&gt;includepy&lt;-- tests/example.py
+        ;;;--&gt;includepy&lt;-- example.py
         ;;;--&gt;some_option&lt;-- some_value
         </code></pre>"""
     )
@@ -42,11 +42,11 @@ def test_escape_simple():
     # line.
     expected_html = textwrap.dedent(
         """\
-        <pre><code>--&gt;includepy&lt;-- tests/example.py
+        <pre><code>--&gt;includepy&lt;-- example.py
         --&gt;some_option&lt;-- some_value
-        ;--&gt;includepy&lt;-- tests/example.py
+        ;--&gt;includepy&lt;-- example.py
         ;--&gt;some_option&lt;-- some_value
-        ;;--&gt;includepy&lt;-- tests/example.py
+        ;;--&gt;includepy&lt;-- example.py
         ;;--&gt;some_option&lt;-- some_value
         </code></pre>"""
     )
