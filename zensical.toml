@@ -4,6 +4,7 @@ site_description = "Include Python source code in Markdown files."
 site_author = "Rob Moss"
 copyright = "Copyright &copy; 2026 Rob Moss"
 site_url = "https://includepy.readthedocs.io/"
+repo_url = "https://github.com/robmoss/includepy"
 nav = [
   { "Get started" = "index.md" },
   { "Options" = "options.md"},
@@ -15,6 +16,7 @@ nav = [
 
 [project.theme]
 language = "en"
+icon.repo = "fontawesome/brands/git-alt"
 features = [
     "content.code.annotate",
     "content.code.copy",
