@@ -8,7 +8,7 @@ The `includepy` package provides a Markdown preprocessor that allows you to incl
 
 !!! note
 
-    This extensions works with all of the standard [code block features](https://zensical.org/docs/authoring/code-blocks/), such as line numbering, line highlighting, and code annotations.
+    This extension works with all of the standard [code block features](https://zensical.org/docs/authoring/code-blocks/), such as line numbering, line highlighting, and code annotations.
     See [Including a function](#including-a-function) for an example.
 
 ## Installation
