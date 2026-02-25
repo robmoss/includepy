@@ -38,9 +38,9 @@ Add the following settings to your [Zensical](https://zensical.org/) or [MkDocs]
 
 ## Example Python file
 
-We  use the `example.py` file in the examples below:
+We use the following `example.py` file in the examples below:
 
-```py
+```py title="example.py"
 --8<-- "example.py"
 ```
 
