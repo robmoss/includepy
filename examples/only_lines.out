@@ -1,0 +1,10 @@
+```
+def factorial(n: int) -> int:
+        value *= n
+    return value
+def factorial(n: int) -> int:
+    value = n  # (1)
+    while n > 1:
+    while n > 1:
+        n -= 1
+```

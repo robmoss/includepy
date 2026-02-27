@@ -124,6 +124,39 @@ x = 1
 y = 2
 ```
 
+## Including only a subset of lines
+
+If you write the following Markdown:
+
+~~~md
+```py
+;-->includepy<-- example.py
+;-->pyobject<-- factorial
+;-->only_lines<-- 1,3-4,-2,5-
+```
+~~~
+
+You will get the following HTML:
+
+```py
+def factorial(n: int) -> int:
+    while n > 1:
+        n -= 1
+def factorial(n: int) -> int:
+    value = n  # (1)
+        value *= n
+    return value
+```
+
+The [``only_lines`` option](options.md) accepts one or more line ranges, separated by commas, and each line range can take any of the following forms:
+
+- `"n"`: Line number `n`;
+- `"m-n"`: All lines from number `m` to number `n` (inclusive);
+- `"m-"`: All lines from number `m` to the end (inclusive); and
+- `"-n"`: All lines from the start to line number `n` (inclusive).
+
+Note that line numbers start at 1.
+
 ## Adding extra indentation
 
 If you write the following Markdown:

@@ -18,8 +18,11 @@ from typing import Any
 # 3. Option name
 # 4. Option value
 RE_OPTION = re.compile(
-    r"^([ \t]*)(;*)-->([a-zA-Z0-9-_]+)<--[ \t]*([a-zA-Z0-9-_./]+)[ \t]*$"
+    r"^([ \t]*)(;*)-->([a-zA-Z0-9-_]+)<--[ \t]*(\S+)[ \t]*$"
 )
+
+# Match any of "m-n", "m-", "-n", "n".
+RE_LINERANGE = re.compile(r"^([0-9]+-[0-9+]|[0-9]+-|-[0-9]+|[0-9])+$")
 
 
 def valid_options() -> set[str]:
@@ -33,7 +36,12 @@ def default_options() -> dict[str, str]:
     """
     Returns default values for options that have defaults.
     """
-    return {"lines_before": "0", "lines_after": "0", "extra_indent": "0"}
+    return {
+        "lines_before": "0",
+        "lines_after": "0",
+        "extra_indent": "0",
+        "only_lines": "",
+    }
 
 
 def find_object(name: str | None, node: ast.AST) -> ast.AST:
@@ -55,6 +63,61 @@ def find_object(name: str | None, node: ast.AST) -> ast.AST:
         node = matches[0]
 
     return node
+
+
+def selected_lines(input_lines: list[str], only_lines: str) -> list[str]:
+    """
+    Return only selected lines from a code block.
+
+    Parameters
+    ----------
+    input_lines : list[str]
+        The input lines of text.
+    only_lines : str
+        A string that contains one or more line-range specifiers, separated by
+        commas.
+        Each specifier must have one of the following forms: ``n`` for the
+        ``nth`` input line, ``n-`` for every line from the ``nth`` to the end,
+        ``-n`` for every line from the start up to the ``nth``, or ``n-p`` for
+        every line from the ``nth`` up to the ``pth``.
+        Note that line numbering begins at ``1``.
+
+    Returns
+    -------
+    list[str]
+        The selected lines of text.
+    """
+    line_ranges = only_lines.split(",")
+    lr_matches = [RE_LINERANGE.match(lr) for lr in line_ranges]
+
+    output_lines = []
+
+    for lr in lr_matches:
+        if lr is None:
+            raise IncludePyError("Invalid only_lines: {only_lines}")
+
+        bounds = tuple(lr.group(0).split("-"))
+        try:
+            match bounds:
+                case (only,):
+                    ix = int(only) - 1
+                    output_lines.append(input_lines[ix])
+                case (start, ""):
+                    ix = int(start) - 1
+                    output_lines.extend(input_lines[ix:])
+                case ("", end):
+                    ix = int(end)
+                    output_lines.extend(input_lines[:ix])
+                case (start, end):
+                    a = int(start) - 1
+                    b = int(end)
+                    output_lines.extend(input_lines[a:b])
+                case _:
+                    raise ValueError(bounds)
+        except (ValueError, IndexError) as e:
+            raise IncludePyError(f"Invalid only_lines: {lr.group(0)}") from e
+
+    return output_lines
 
 
 class ProcessorState:
@@ -223,6 +286,11 @@ class ParseBlock(ProcessorState):
         obj_lines = textwrap.dedent("".join(obj_lines)).split("\n")
         # Remove the trailing empty line after the final newline.
         obj_lines = obj_lines[:-1]
+
+        # Retain only selected lines if "only_lines" is defined.
+        only_lines = options["only_lines"]
+        if only_lines:
+            obj_lines = selected_lines(obj_lines, only_lines)
 
         # Add the source lines to the document.
         # NOTE: we need to indent and strip newlines.
