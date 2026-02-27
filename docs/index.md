@@ -201,6 +201,30 @@ You will get the following HTML:
 
 !!! note
 
+    When [including only a subset of lines](#including-only-a-subset-of-lines), line numbering begins at the first included line.
+
+If you write the following Markdown:
+
+~~~md
+```py
+;-->includepy<-- example.py
+;-->pyobject<-- factorial
+;-->lines_before<-- 4
+;-->only_lines<-- 1-2
+```
+~~~
+
+You will get the following HTML:
+
+```py
+-->includepy<-- example.py
+-->pyobject<-- factorial
+-->lines_before<-- 4
+-->only_lines<-- 1-2
+```
+
+!!! note
+
     Extra lines will be truncated if they would extend before the first line or after the final line of the source file.
 
 If you write the following Markdown:
