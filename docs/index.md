@@ -263,6 +263,58 @@ You will get the following HTML:
 -->lines_after<-- 40
 ```
 
+## Removing docstrings
+
+Consider the following `examples/docstring.py` file:
+
+```py title="examples/docstring.py"
+--8<-- "examples/docstring.py"
+```
+
+If you write the following Markdown:
+
+~~~md
+```py
+;-->includepy<-- examples/docstring.py
+;-->pyobject<-- my_function
+;-->strip_docstring<-- true
+```
+~~~
+
+You will get the following HTML:
+
+```py
+-->includepy<-- examples/docstring.py
+-->pyobject<-- my_function
+-->strip_docstring<-- true
+```
+
+If there is no docstring, the [`strip_docstring` option](options.md) has no effect.
+
+!!! note
+
+    Docstrings are removed before the [`only_lines` option](options.md) takes effect.
+
+If you write the following Markdown:
+
+~~~md
+```py
+;-->includepy<-- examples/docstring.py
+;-->pyobject<-- my_function
+;-->strip_docstring<-- true
+;-->only_lines<-- 1-2
+```
+~~~
+
+You will get the following HTML:
+
+```py
+-->includepy<-- examples/docstring.py
+-->pyobject<-- my_function
+-->strip_docstring<-- true
+-->only_lines<-- 1-2
+```
+
 ## Nested in a list
 
 If you write the following Markdown:

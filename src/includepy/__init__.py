@@ -41,7 +41,23 @@ def default_options() -> dict[str, str]:
         "lines_after": "0",
         "extra_indent": "0",
         "only_lines": "",
+        "strip_docstring": "false",
     }
+
+
+def string_to_bool(value: str) -> bool:
+    """
+    Convert a string option into a Boolean value.
+    """
+    truthy = {"true", "yes"}
+    falsy = {"false", "no"}
+    key = value.lower()
+    if key in truthy:
+        return True
+    elif key in falsy:
+        return False
+    else:
+        raise IncludePyError(f"Not a valid boolean: {value}")
 
 
 def find_object(name: str | None, node: ast.AST) -> ast.AST:
@@ -63,6 +79,24 @@ def find_object(name: str | None, node: ast.AST) -> ast.AST:
         node = matches[0]
 
     return node
+
+
+def find_docstring(obj: ast.AST) -> ast.Expr | None:
+    """
+    Find a docstring node in an object's syntax tree.
+    """
+    if hasattr(obj, "body") and len(obj.body) > 0:
+        first_node = obj.body[0]
+    else:
+        return None
+    if (
+        isinstance(first_node, ast.Expr)
+        and hasattr(first_node, "value")
+        and isinstance(first_node.value, ast.Constant)
+        and isinstance(first_node.value.value, str)
+    ):
+        return first_node
+    return None
 
 
 def selected_lines(input_lines: list[str], only_lines: str) -> list[str]:
@@ -278,9 +312,22 @@ class ParseBlock(ProcessorState):
         if n_indent > 0:
             indent_str = self.indent_str + n_indent * " "
 
+        strip_docstring = string_to_bool(options["strip_docstring"])
+
         start_ix = max(0, lineno - 1 - n_back)
         end_ix = min(len(source_lines), end_lineno + n_fwd)
         obj_lines = source_lines[start_ix:end_ix]
+
+        # NOTE: remove docstring lines if instructed to do so.
+        if strip_docstring:
+            ds_node = find_docstring(obj)
+            if ds_node is not None:
+                ds_start = ds_node.lineno
+                ds_end = ds_node.end_lineno
+                obj_lines = (
+                    source_lines[start_ix : ds_start - 1]
+                    + source_lines[ds_end:end_ix]
+                )
 
         # NOTE: remove any code indentation (e.g., class methods).
         obj_lines = textwrap.dedent("".join(obj_lines)).split("\n")

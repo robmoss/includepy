@@ -14,6 +14,9 @@ icon: lucide/list
 
 - `extra_indent`: the number of additional spaces to indent each line; **default:** 0.
 
+- `strip_docstring`: whether to remove the docstring (if any); **default:** false.
+  Accepted values are `"true"`, `"yes"`, `"false"`, and `"no"`.
+
 - `only_lines`: a comma-separated string of line numbers and/or line ranges (``m-n``, ``m-``, ``-n``, ``n``).
 
 ## Extension priority

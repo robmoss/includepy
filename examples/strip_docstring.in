@@ -1,0 +1,5 @@
+```
+-->includepy<-- examples/docstring.py
+-->pyobject<-- my_function
+-->strip_docstring<-- true
+```
